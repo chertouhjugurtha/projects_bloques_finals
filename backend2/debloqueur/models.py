@@ -12,9 +12,6 @@ class Debloqueur(models.Model):
     phone = models.CharField(unique=True, max_length=255, null=False, blank=False)
     qualite = models.CharField(unique=True, max_length=255, null=False, blank=False)
     bureau = models.CharField(unique=True, max_length=255, null=False, blank=False)
-    dtdebloqueur = models.CharField(unique=True, max_length=255, null=False, blank=False)
-    
-
     ministere=models.ForeignKey(Ministere, on_delete=models.CASCADE)
     class Meta:
         db_table = 'debloqueur'
