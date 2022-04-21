@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 import uuid
 # from deblocage.models import Deblocage
-from debloqueur.models import Debloqueur
+#from debloqueur.models import Debloqueur
 
 # Create your models here.
 class Motifs(models.Model):
@@ -13,8 +13,8 @@ class Motifs(models.Model):
     detail = models.CharField(unique=True, max_length=255, null=False, blank=False)
     
     # deblocage = models.ManyToManyField(Debloqueur, through='Deblocage')
-    deblocage = models.ManyToManyField(Debloqueur, blank=True, related_name="deblocage")
+    #deblocage = models.ManyToManyField(Debloqueur, blank=True, related_name="deblocage")
         
-
     class Meta:
         db_table = 'motifs'
+

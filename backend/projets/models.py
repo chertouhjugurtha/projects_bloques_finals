@@ -5,7 +5,7 @@ from motifs.models import Motifs
 from observation.models import Observation
 from entreprise.models import Entreprise
 # Create your models here.
-class Projects(models.Model):
+class Projets(models.Model):
 
     # Constantes des états de grant:
 
@@ -24,4 +24,4 @@ class Projects(models.Model):
         
 
     class Meta:
-        db_table = 'projects'
+        db_table = 'projets'
