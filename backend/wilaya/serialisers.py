@@ -1,9 +1,9 @@
 
 from rest_framework import serializers
 
-from .models import Ministere
+from .models import Wilaya
 
-class MinistereSetSerializer(serializers.ModelSerializer):
+class WilayaSetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Ministere
+        model = Wilaya
         fields = ('__all__')

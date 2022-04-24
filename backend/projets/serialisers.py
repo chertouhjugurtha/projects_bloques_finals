@@ -1,9 +1,9 @@
 
 from rest_framework import serializers
 
-from .models import Projects
+from .models import Projets
 
 class projectsSetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Projects
+        model = Projets
         fields = ('__all__')

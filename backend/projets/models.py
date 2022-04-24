@@ -18,7 +18,6 @@ class Projets(models.Model):
     entree = models.DateTimeField(null=True)
     livree = models.DateTimeField(null=True)
     code_fichier = models.CharField(unique=True, max_length=255, null=False)
-    phone = models.CharField(max_length=100, null=False, blank=False)
     observation = models.ForeignKey(Observation, on_delete=models.SET_NULL, null=True)
     motifs = models.ManyToManyField(Motifs, blank=True)
         
