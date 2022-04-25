@@ -1,9 +1,10 @@
+from djoser.serializers import UserCreateSerializer
+from django.contrib.auth import get_user_model
 
-from rest_framework import serializers
+User = get_user_model()
 
-from .models import Debloqueur
 
-class DebloqueurSetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Debloqueur
-        fields = ('__all__')
+class UserCreateSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model = User
+        fields = ("id", "email", "username", "nom", "prenom", "password")

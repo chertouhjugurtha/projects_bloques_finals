@@ -14,4 +14,4 @@ class Activite(models.Model):
     branche = models.ForeignKey(Branche, on_delete=models.SET_NULL, null=True)
 
     class Meta:
-        db_table = 'Activite'
+        db_table = 'activite'

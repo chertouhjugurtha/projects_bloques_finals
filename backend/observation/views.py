@@ -11,6 +11,7 @@ class ObservationViewSet(APIView):
 
     def post(self, request):
         
+        
         serializer = ObservationSetSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
