@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-(ts&o0(oo5ja47+1kvx*1i^kg9t@^k@0o9#tj3^c)x_#7jg^%y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1','*','172.19.14.18']
 
 # Application definition
 
@@ -40,12 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 
-    'djoser',
-    "rest_framework_simplejwt",
-    "rest_framework_simplejwt.token_blacklist",
+    # 'djoser',
+    # "rest_framework_simplejwt",
+    # "rest_framework_simplejwt.token_blacklist",
     'drf_yasg',
 
-    # 'accounts',
+    'utilisateurs',
     'branche',
     'commune',
     'deblocages',
@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'backend2.wsgi.application'
 
 DATABASES = {
     'default': {
-         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'projects_blouques',
         'USER': 'projects_blouques_admin',
         'PASSWORD': 'adminpass',
@@ -104,58 +104,80 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-REST_FRAMEWORK = {
+AUTH_USER_MODEL = 'utilisateurs.User'
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',
+#         'rest_framework.permissions.IsAdminUser',
+#     ],
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#     ),
+#     'DEFAULT_FILTER_BACKENDS' : ('django_filters.rest_framework.DjangoFilterBackend',)
+# }
 
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",)
-   
+JWT_AUTH = {
+  'JWT_ENCODE_HANDLER': 'rest_framework_jwt.utils.jwt_encode_handler',
+  'JWT_DECODE_HANDLER': 'rest_framework_jwt.utils.jwt_decode_handler',
+  'JWT_PAYLOAD_HANDLER': 'rest_framework_jwt.utils.jwt_payload_handler',
+  'JWT_PAYLOAD_GET_USER_ID_HANDLER': 'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
+  'JWT_RESPONSE_PAYLOAD_HANDLER': 'rest_framework_jwt.utils.jwt_response_payload_handler',
+
+  'JWT_SECRET_KEY': 'qsdfljkeh&é6789éI34@etyetyeiopfhpi21543épzeuofZEHPGF%qdsFNPOQFpqSHOInlkxcnv67',#SECRET_KEY
+  'JWT_GET_USER_SECRET_KEY': None,
+  'JWT_PUBLIC_KEY': None,
+  'JWT_PRIVATE_KEY': None,
+  'JWT_ALGORITHM': 'HS256',
+  'JWT_VERIFY': True,
+  'JWT_VERIFY_EXPIRATION': True,
+  'JWT_LEEWAY': 0,
+  'JWT_EXPIRATION_DELTA':timedelta(days=30),
+  'JWT_AUDIENCE': None,
+  'JWT_ISSUER': None,
+  'JWT_ALLOW_REFRESH': False,
+  'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=30),
+  'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+  'JWT_AUTH_COOKIE': None,
 }
 
-AUTH_USER_MODEL = 'debloqueur.Debloqueur'
-DJOSER = {
-    "LOGIN_FIELD": "email",
-    "USER_CREATE_PASSWORD_RETYPE": True,
-    "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
-    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
-    "SEND_CONFIRMATION_EMAIL": False,
-    "SET_USERNAME_RETYPE": True,
-    "SET_PASSWORD_RETYPE": True,
-    "USERNAME_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
-    "PASSWORD_RESET_CONFIRM_URL": "email/reset/confirm/{uid}/{token}",
-    # "ACTIVATION_URL": "activate/{uid}/{token}",
-    "SEND_ACTIVATION_EMAIL": False,
-    "SOCIAL_AUTH_TOKEN_STRATEGY": "djoser.social.token.jwt.TokenStrategy",
-    "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": [
-        "your redirect url",
-        "your redirect url",
-    ],
-    "SERIALIZERS": {
-        "user_create": "debloqueur.serializers.UserCreateSerializer",  # custom serializer
-        "user": "djoser.serializers.UserSerializer",
-        "current_user": "djoser.serializers.UserSerializer",
-        "user_delete": "djoser.serializers.UserSerializer",
-    },
-}
+# AUTH_USER_MODEL = 'accounts.CustomUser'
+# DJOSER = {
+#     "LOGIN_FIELD": "email",
+#     "USER_CREATE_PASSWORD_RETYPE": True,
+#     # "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
+#     # "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+#     # "SEND_CONFIRMATION_EMAIL": False,
+#     # "SET_USERNAME_RETYPE": True,
+#     # "SET_PASSWORD_RETYPE": True,
+#     # "USERNAME_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
+#     # "PASSWORD_RESET_CONFhttp://127.0.0.1:8000/api/v1/IRM_URL": "email/reset/confirm/{uid}/{token}",
+#     # "ACTIVATION_URL": "activate/{uid}/{token}",
+#     # "SEND_ACTIVATION_EMAIL": False,
+#     # "SOCIAL_AUTH_TOKEN_STRATEGY": "djoser.social.token.jwt.TokenStrategy",
+#     # "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": [
+#     #     "your redirect url",
+#     #     "your redirect url",
+#     # ],
+#     "SERIALIZERS": {
+#         "user_create": "accounts.serializers.UserCreateSerializer",  # custom serializer
+#         "user": "djoser.serializers.UserSerializer",
+#         "current_user": "djoser.serializers.UserSerializer",
+#         "user_delete": "djoser.serializers.UserSerializer",
+#     },
+# }
 
-# CORS HEADERS
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-# EMAIL CONFIG
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "localhost"
-EMAIL_PORT = "1025"
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
-EMAIL_USE_TLS = False
+# # CORS HEADERS
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = True
+# # EMAIL CONFIG
+# EMAIL_BACKEND = "accounts.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = "localhost"
+# EMAIL_PORT = "1025"
+# EMAIL_HOST_USER = ""
+# EMAIL_HOST_PASSWORD = ""
+# EMAIL_USE_TLS = False
 
 
-SIMPLE_JWT = {
-    "AUTH_HEADER_TYPES": ("JWT",),
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

@@ -20,7 +20,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     re_path(
         r"^api/v1/docs/$",
         schema_view.with_ui("swagger", cache_timeout=0),
@@ -30,7 +30,7 @@ urlpatterns = [
     path('api/v1/', include('djoser.urls')),
     path('api/v1/', include('djoser.urls.jwt')),
 
-    path('api/v1/', include('accounts.urls')),
+    path('api/v1/', include('utilisateurs.urls')),
     path('api/v1/', include('wilaya.urls')),
     path('api/v1/', include('commune.urls')),
     path('api/v1/', include('gerant.urls')),
@@ -40,7 +40,8 @@ urlpatterns = [
     path('api/v1/', include('projets.urls')),
     path('api/v1/', include('motifs.urls')),
     path('api/v1/', include('observation.urls')),
-    path('api/v1/', include('debloqueur.urls')),
+    # path("api/v1/", include("accounts.urls")),
+    # path('api/v1/', include('debloqueur.urls')),
     path('api/v1/', include('ministere.urls')),
 
 ]
