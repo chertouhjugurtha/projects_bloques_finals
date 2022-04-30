@@ -4,11 +4,19 @@ import entreprise
 from .models import Entreprise
 from rest_framework import status
 from rest_framework.views import APIView
-from .serialisers import EntrepriseSetSerializer
+from .serializers import EntrepriseSetSerializer
 from rest_framework.decorators import api_view
+from rest_framework import permissions
 
 class EntrepriseViewSet(APIView):
-
+    # permission_classes_by_action = {
+    #     'create': (permissions.IsAdminUser,),
+    #     'list': (permissions.IsAuthenticatedOrReadOnly,),
+    #     'retrieve': (permissions.AllowAny,),
+    #     'update': (permissions.AllowAny,),
+    #     'destroy': (permissions.IsAdminUser,),
+        
+    # }
     def post(self, request):
         serializer = EntrepriseSetSerializer(data=request.data,many=True)
         if serializer.is_valid():
@@ -41,7 +49,7 @@ class EntrepriseViewSet(APIView):
 
 
 # import json
-# @api_view([ 'POST'])
+# @api_view([ 'GET'])
 # def add_entreprise(request):
     
 #     with open('code_postal.json', 'r',encoding="utf8") as f:

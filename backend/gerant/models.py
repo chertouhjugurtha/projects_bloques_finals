@@ -13,10 +13,10 @@ class Gerant(models.Model):
     date_naissance = models.DateField(null=True)
     nationalite = models.CharField(max_length=100,null=False, blank=False)
     gerant = models.BooleanField(null=False)
-    email = models.CharField(max_length=100, null=False)
+    email = models.CharField(max_length=100)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Veuillez introduire votre numéro de téléphone sous  format: '+999999999'. en 15 carataires.")
-    phone = models.CharField(validators=[phone_regex], max_length=17, blank=True) 
-    password = models.CharField(max_length=50,validators=[MinValueValidator(8)], null=False)
+    phone = models.CharField(validators=[phone_regex], max_length=17) 
+    
         
 
     class Meta:

@@ -52,7 +52,7 @@ def get_commune(request):
         for json_obj in range(len(json_objs)-1):
             commune=json_objs[json_obj]['commune_name_ascii']
             post_code=json_objs[json_obj]['post_code']
-            commune=json_objs[json_obj]['commune_name_fr']
+            # commune=json_objs[json_obj]['commune_name_fr']
             region=json_objs[json_obj]['post_name_ascii']
             try:
                 address=json_objs[json_obj]["post_address_commune"]

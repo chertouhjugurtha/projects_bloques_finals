@@ -4,12 +4,22 @@ from rest_framework.views import APIView
 from .models import Projets
 from .serialisers import projectsSetSerializer
 from rest_framework import status
-
+from rest_framework.decorators import api_view
+from rest_framework import permissions
 
 class ProjetsViewSet(APIView):
+    # permission_classes = (permissions.AllowAny,)
 
+    # Refer to https://stackoverflow.com/a/35987077/1677041
+    permission_classes_by_action = {
+        'create': (permissions.IsAdminUser,),
+        'list': (permissions.IsAuthenticatedOrReadOnly,),
+        'retrieve': (permissions.AllowAny,),
+        'update': (permissions.AllowAny,),
+        'destroy': (permissions.IsAdminUser,),
+        # 'search': (permissions.IsAuthenticated,) 
+    }
     def post(self, request):
-    
         serializer = projectsSetSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -33,7 +43,12 @@ class ProjetsViewSet(APIView):
                 Response(project.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response({"erreur": "requête mal formée"}, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, pk, format=None):
-        snippet = Projets.get_object(pk)
-        snippet.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    # def delete(self, request, pk):
+    #     snippet = Projets.get_object(pk)
+    #     snippet.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
+# import json
+# @api_view([ 'GET'])
+# def get_projects(request):
+#     params=request.params
+#     projet=Projets.objects.all()

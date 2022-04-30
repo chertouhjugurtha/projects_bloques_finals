@@ -1,12 +1,15 @@
 
 from rest_framework.response import Response
+
 from .models import Gerant
 from rest_framework import status
 from rest_framework.views import APIView
 from .serialisers import GerantSetSerializer
+from rest_framework import permissions
+from utilisateurs.views import AdminAuthenticationPermission
 
 class GerantViewSet(APIView):
-
+    # permission_classes = (permissions.IsAuthenticated,AdminAuthenticationPermission)
     def post(self, request):
         
         serializer = GerantSetSerializer(data=request.data,many=True)

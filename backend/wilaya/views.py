@@ -6,9 +6,26 @@ from rest_framework.views import APIView
 from .serialisers import WilayaSetSerializer
 from rest_framework.decorators import api_view
 import json
+from rest_framework import permissions
+from rest_framework.authentication import BasicAuthentication,SessionAuthentication
+
+from utilisateurs.views import AdminAuthenticationPermission
+
 
 class WilayaViewSet(APIView):
+    # ADMIN_ONLY_AUTH_CLASSES = [BasicAuthentication, SessionAuthentication]
 
+    # permission_classes = (permissions.IsAuthenticated,AdminAuthenticationPermission)
+
+    # permission_classes = (permissions.IsAdminUser,)
+    # permission_classes_by_action = {
+    #     'create': (permissions.IsAdminUser,),
+    #     'list': (permissions.IsAuthenticatedOrReadOnly,),
+    #     'retrieve': (permissions.AllowAny,),
+    #     'update': (permissions.AllowAny,),
+    #     'destroy': (permissions.IsAdminUser,),
+        
+    # }
     def post(self, request):
         serializer = WilayaSetSerializer(data=request.data,many=True)
         # serializer = WilayaSetSerializer(data=request.data)
